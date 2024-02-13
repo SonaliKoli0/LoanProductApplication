@@ -1,0 +1,31 @@
+package product;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.*;
+public class AppStarter {
+	
+	public static void main(String[] args) throws Exception{
+		try {
+            // Establish database connection
+            Connection connection = DatabaseHelper.getConnection();
+            // Perform database operations here
+            System.out.println("db connected");
+            // Close the connection
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		HashMap<String,String> inputs =new HashMap<>();
+		 for (int i = 0; i < args.length-1; i++)
+		 {  if (i < args.length - 1)
+		 	{ 
+			 inputs.put(args[i], args[i+1]);
+			 i++;
+			 }
+		 }
+  
+    Product.getProduct(inputs);
+   
+   
+	}
+}

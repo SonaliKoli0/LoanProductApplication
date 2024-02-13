@@ -1,0 +1,32 @@
+package product;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Util {
+
+	// Method to parse date from string
+	public static Date parseDate(String dateString) {
+		// Assuming dateString is in "dd/MM/yyyy" format
+		try {
+			return new SimpleDateFormat("dd/MM/yyyy").parse(dateString);
+		} catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static java.sql.Date toSQLDate(java.util.Date date) {
+		if (date == null) {
+			return null;
+		}
+		return new java.sql.Date(date.getTime());
+	}
+	public static java.util.Date toUtilDate(java.sql.Date date) {
+		if (date == null) {
+			return null;
+		}
+		return new java.util.Date(date.getTime());
+	}
+}

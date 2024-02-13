@@ -1,0 +1,20 @@
+package product;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class Util {
+	
+	
+	// Method to parse date from string
+    public static Date parseDate(String dateString) {
+        // Assuming dateString is in "dd-MM-yyyy" format
+        try {
+            return new SimpleDateFormat("dd-MM-yyyy").parse(dateString);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}

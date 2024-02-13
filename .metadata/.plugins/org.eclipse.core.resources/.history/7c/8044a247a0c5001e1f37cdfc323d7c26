@@ -1,0 +1,19 @@
+package product;
+import java.util.*;
+public class AppStarter {
+	 public static String getOption(String args[], String opt) {
+	        return null;
+	    }
+	public static void main(String[] args){
+		HashMap<String,String> inputs =new HashMap<>();
+		 for (int i = 0; i < args.length-1; i++)
+		 {  if (i < args.length - 1)
+		 	{ 
+			 inputs.put(args[i], args[i+1]);
+			 i++;
+			 }
+		 }
+    System.out.println(inputs);
+  
+	}
+}

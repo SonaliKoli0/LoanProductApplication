@@ -1,0 +1,142 @@
+package product;
+
+import java.util.Date;
+import java.util.List;
+import java.util.ArrayList;
+
+public class LoanProduct extends Product {
+ 
+    private int loanId;
+    private double rate;
+    private double totalValue;
+    private List<Schedule> disbursementSchedule;
+    private Schedule schedule;
+    
+
+ 
+    public LoanProduct() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public LoanProduct(int productId, int loanId, Date startDate, Date endDate, String productType, double totalValue,
+			double rate, List<Schedule> disbursementSchedule, ArrayList<Cashflow> cashflows) {
+		// TODO Auto-generated constructor stub
+		super(productId,productType, startDate, endDate, cashflows);
+		this.loanId=loanId;
+		this.rate= rate;
+		this.totalValue= totalValue;
+		this.disbursementSchedule= disbursementSchedule;
+	
+	}
+	public LoanProduct( int loanId,double totalValue,
+			double rate, List<Schedule> disbursementSchedule,Product p) {
+		// TODO Auto-generated constructor stub
+		super(p);
+		this.loanId=loanId;
+		this.rate= rate;
+		this.totalValue= totalValue;
+		this.disbursementSchedule= disbursementSchedule;
+	
+	}
+
+	public int getLoanId() {
+        return loanId;
+    }
+ 
+    public void setLoanId(int loanId) {
+        this.loanId = loanId;
+    }
+ 
+    public double getRate() {
+        return rate;
+    }
+ 
+    public void setRate(Double rate) {
+        this.rate = rate;
+    }
+ 
+    public double getTotalValue() {
+        return totalValue;
+    }
+ 
+    public void setTotalValue(Double totalValue) {
+        this.totalValue = totalValue;
+    }
+ 
+    public List<Schedule> getDisbursementSchedule() {
+        return disbursementSchedule;
+    }
+ 
+    public void setDisbursementSchedule(List<Schedule> disbursementSchedule) {
+        this.disbursementSchedule = disbursementSchedule;
+    }
+ 
+    public void updateProduct(int LoanId) {
+        // Replace with logic to update the loan product
+    }
+ 
+    public void createProduct(LoanProduct Ip) {
+        // Replace with logic to create a new loan product
+    	try {
+			ProductSQL.insert(Ip);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
+ 
+    @Override
+    public Product readProduct(int id){
+    	Product lp=null;
+    	try {
+    
+			lp=LoanProductSQL.readProduct(id);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	return lp;
+    }
+    @Override
+    public void deleteProduct(int ProductId) {
+        
+    	try {
+    	    
+			LoanProductSQL.deleteProduct(ProductId);
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    }
+ 
+    public void repayAmount(int loanId, Double amount,Date date) {
+    	try {
+			ScheduleSQL.insertRepaymentSchedule(loanId, amount,Util.toSQLDate(date) );
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        // Replace with logic to process the loan repayment
+    }
+ 
+    @Override
+    public String toString() {
+        return "LoanProduct{" +
+    
+                "loanId=" + getLoanId() +
+                ", rate=" + rate +
+                ",Start Date="+getStartDate()+
+                ",End Date="+getEndDate()+
+                ", totalValue=" + totalValue +
+                ", disbursementSchedule=" +  disbursementSchedule +
+                '}';
+    }
+
+	public Schedule getSchedule() {
+		return schedule;
+	}
+
+	public void setSchedule(Schedule schedule) {
+		this.schedule = schedule;
+	}
+}
